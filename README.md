@@ -7,6 +7,6 @@ Desplegado en vercel
 
 1. Clonar el repositorio:
 ```bash
-git clone https://github.com/tu_usuario/nextjs-presentation.git
+git clone https://github.com/Aley-r-t/nextjs-presentation.git
 cd nextjs-presentation
 
