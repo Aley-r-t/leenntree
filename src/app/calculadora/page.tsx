@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./Calculadora.module.css";
+import styles from "./calculadora.module.css";
 
 interface Session {
   day: string;
