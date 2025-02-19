@@ -1,0 +1,96 @@
+.container {
+    padding: 1.5rem;
+    font-family: 'Arial', sans-serif;
+    max-width: 500px;
+    margin: auto;
+    background: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .h1 {
+    text-align: center;
+  }
+
+  .h2 {
+    text-align: center;
+  }
+  
+  .input-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-group label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .input-group input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .day-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .day-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+  }
+  
+  .day-button.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .button:hover {
+    background-color: #218838;
+  }
+  
+  .session-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .session-list li {
+    background: #f8f9fa;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .results {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #e9ecef;
+    border-radius: 5px;
+  }
+  
+  .results p {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
