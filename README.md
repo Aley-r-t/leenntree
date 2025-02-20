@@ -4,7 +4,7 @@ Este es un proyecto sencillo de presentación con **Next.js** para demostrar una
 Desplegado en vercel
 
 NOTA:
-Si es que hace clic al pinguino ir a una calculadora interactiva.
+Si es que hace clic al pinguino esto le llevara a una calculadora interactiva.
 Para calcular su salario por hora por semana y por dia si es que recibe su salario en horas.
 
 
