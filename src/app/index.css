@@ -1,96 +1,288 @@
-body, html {
+
+.todo_container {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Estilos para el icono de blog */
+.blog {
+  width: 24px;
+  height: 28px;
+  /* Convierte cualquier color oscuro en blanco */
+  filter: brightness(0) invert(1);
+  /* Opcional: un pequeño efecto al pasar el ratón */
+  transition: opacity 0.2s;
+}
+
+.blog:hover {
+  opacity: 0.8;
+}
+
+/* Estilo general del círculo */
+.container2 {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1); /* suave fondo blanco translúcido */
+  border: 2px solid #ffffff55;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* container__recuadro */
+
+/* Estilo del texto interior */
+.circle__text {
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+.name_circle {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid #ffffff55;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.circle_nombre {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid #ffffff55;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  }
+}
+
+
+.circle__text {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+}
+
+/* Extra opcional: animación suave */
+.container2 {
+  transition: transform 0.3s ease;
+}
+.container2:hover {
+  transform: scale(1.05);
+}
+
+/* Círculo como pseudo-elemento del contenedor */
+.todo_container::before {
+  content: '';
+  position: absolute;
+  left: var(--mx);
+  top: var(--my);
+  width: 150px;
+  height: 150px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: background 0.2s, opacity 0.2s;
+  animation: spin 3s linear infinite;
+  opacity: 0;
+  z-index: 1;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+/* Estilos globales: fondo negro con puntos blancos */
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
+    background-color: #000;
+    background-image: radial-gradient(#fff 1px, transparent 1px);
+    background-size: 20px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
 }
-.todo_container {
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    padding: 20px;
+/* Dentro de tu CSS existente: */
+.center_box {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  width: 90%;
+  max-width: 350px;
+  text-align: center;
 }
-.todo_container::after{
+
+.container__recuadro {
+  border-radius: 4%;
+  background: #fff;
+  justify-content: center;
+  text-align: center;
+}
+
+.bienvenido_title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 1rem;
+}
+
+.todo_container {
+  position: relative; /* necesario para posicionar .circle */
+}
+
+.circle {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.6);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  animation: spin 3s linear infinite;
+}
+
+/* Animación de rotación */
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Contenedor principal: mantiene fondo blanco para destacar sobre el fondo “estrellado” */
+/* index.css */
+
+/* 1) La caja padre guarda la posición del ratón en dos variables CSS */
+.todo_container {
+  position: relative;
+  overflow: hidden;
+  --mx: 50%;
+  --my: 50%;
+}
+
+/* 2) Creamos el “halo” con ::before, que usará esas variables */
+.todo_container::before {
+  content: '';
+  position: absolute;
+  left: var(--mx);
+  top: var(--my);
+  width: 150px;
+  height: 150px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: background 0.2s;
+}
+
+/* (resto de estilos...) */
+/* Efecto de degradado difuso detrás del contenedor */
+.todo_container::after {
+    content: '';
     position: absolute;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    content: ' ';
-    background-image: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(213,213,213,1) 100%);
-    background-color: orange;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(63,94,251,0.8) 0%, rgba(213,213,213,0.8) 100%);
     filter: blur(10px);
     z-index: -1;
 }
 
+/* Título */
 .todo_container h1 {
     font-size: 50px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin: 10px 0 20px;
 }
+
+/* Botones de redes */
 .container {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    
 }
+
 .container button {
     font-size: 20px;
     padding: 15px 40px;
     border: none;
     background-color: #007BFF;
-    color: white;
+    color: #fff;
     cursor: pointer;
     border-radius: 5px;
     display: flex;
     align-items: center;
+    transition: background-color 0.2s;
+}
+.container button:hover {
+    background-color: #0056b3;
 }
 .container button svg {
     margin-inline-start: 10px;
     width: 20px;
     height: 20px;
 }
-.container .GitHub svg {
-    margin-inline-start: 35px;
-}
-.container .LinkedIn svg {
-    margin-inline-start: 20px;
-}
-.container .Facebook svg {
-    color: black;
-}
+.container .LinkedIn svg { margin-inline-start: 20px; }
+.container .GitHub svg   { margin-inline-start: 35px; }
+.container .Facebook svg { color: #000; }
 
-.container button:hover {
-    background-color: #0056b3;
-}
-.links_redirection{
+/* Enlaces de redirección */
+.links_redirection {
     display: flex;
     align-items: center;
     margin-top: 20px;
     gap: 20px;
 }
+
 .links_redirection a {
     text-decoration: none;
-    color: black;
+    color: #000;
 }
 .links_redirection a:hover {
     text-decoration: underline;
 }
+/* Imagen de gato */
+.gato img {
+    border-radius: 50px;
+    width: 200px;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.circle_text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+/* Icono Linux */
 .linuxs {
     width: 24px;
     height: 28px;
 }
-.gato img{
-    border-radius: 50px;
-    width: 200px;
-    height: 150px;
-    margin: 0px 0px 20px 0px;
-}
-
