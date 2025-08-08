@@ -26,16 +26,16 @@ const posts: Post[] = [
         readTime: '8 min',
         date: '15 Jun 2025'
     },
-   // {
-   //     id: '2',
-   //     title: 'Glassmorphism en CSS: Guía paso a paso',
-   //     excerpt: 'Un recorrido visual para dominar el efecto cristal en tus interfaces y crear diseños modernos.',
-   //     image: '/img/Logo-AWS-smile.webp',
-   //     slug: 'glassmorphism-css',
-   //     category: 'CSS',
-   //     readTime: '12 min',
-   //     date: '12 Jun 2025'
-   // },
+    {
+        id: '2',
+        title: 'Resumen de Como robar como un artista',
+        excerpt: 'Un libro que nos enseña a ser creativos y aprovechar nuestras influencias.',
+        image: '/img/KorosenseiAnime.webp',
+        slug: 'resumen-como-robar-como-un-artista',
+        category: 'Backend',
+        readTime: '12 min',
+        date: '12 Jun 2025'
+    },
    //{
    //     id: '3',
    //     title: 'Optimizando React con useRef y useEffect',
@@ -236,10 +236,11 @@ export default function BlogPage() {
                                     <div className={styles.cardMetaItem}>
                                         <CalendarIcon />
                                         <span>{post.date}</span>
+                               
                                     </div>
                                     <div className={styles.cardMetaItem}>
                                         <ClockIcon />
-                                        <span>{post.readTime}</span>
+                                        <span>{post.readTime}</span>    
                                     </div>
                                 </div>
 

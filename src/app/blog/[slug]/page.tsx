@@ -9,9 +9,9 @@ const posts = [
     content: '...',
   },
   {
-    slug: 'glassmorphism-css',
-    title: 'Glassmorphism en CSS: Guía paso a paso',
-    content: 'Contenido completo del artículo sobre Glassmorphism...',
+    slug: 'resumen-como-robar-como-un-artista',
+    title: 'Resumen de “Cómo robar como un artista”',
+    content: 'Contenido completo del artículo sobre “Cómo robar como un artista”...',
   },
   {
     slug: 'optimizando-react',
