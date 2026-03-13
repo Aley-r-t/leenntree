@@ -21,8 +21,10 @@ const WORDLISTS: WordlistRepo[] = [
     description: "Diccionarios curados para proyectos específicos (crawl, endpoints, APIs).", tags: ["personal","api","endpoints"], stars: 42 },
 ];
 
-const QUICK_TAGS = ["fuzzing","passwords","dns","recon","web","api","personal"] as const;
-
+const PROYECTOS_PERSONALES: WordlistRepo[] = [
+  { id: "demo-project", name: "Mi Aplicación Demo", url: "https://github.com/Aley-r-t",
+    description: "Un proyecto personal desarrollado en Next.js para mostrar mis habilidades.", tags: ["react","nextjs","frontend"], stars: 5 },
+];
 function useClipboard() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const copy = async (id: string, text: string) => {
@@ -37,6 +39,7 @@ function useClipboard() {
 
 export default function ProyectosWordlistsPage() {
   const [query, setQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<"utilidades" | "personales">("utilidades");
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<"name" | "stars">("name");
   const [openResources, setOpenResources] = useState(false);
@@ -45,7 +48,8 @@ export default function ProyectosWordlistsPage() {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const filtered = useMemo(() => {
-    let data = [...WORDLISTS];
+    const sourceData = activeCategory === "utilidades" ? WORDLISTS : PROYECTOS_PERSONALES;
+    let data = [...sourceData];
     if (query.trim()) {
       const q = query.toLowerCase();
       data = data.filter(
@@ -59,8 +63,19 @@ export default function ProyectosWordlistsPage() {
     if (sortBy === "name") data.sort((a, b) => a.name.localeCompare(b.name));
     else data.sort((a, b) => (b.stars ?? 0) - (a.stars ?? 0));
     return data;
-  }, [query, activeTag, sortBy]);
+  }, [query, activeTag, sortBy, activeCategory]);
 
+  const availableTags = useMemo(() => {
+    const sourceData = activeCategory === "utilidades" ? WORDLISTS : PROYECTOS_PERSONALES;
+    const tagsSet = new Set<string>();
+    sourceData.forEach(item => item.tags.forEach(t => tagsSet.add(t)));
+    return Array.from(tagsSet).sort();
+  }, [activeCategory]);
+
+  // Resetear el tag activo cuando se cambia de categoría
+  useEffect(() => {
+    setActiveTag(null);
+  }, [activeCategory]);
   // Cerrar dropdown al hacer click fuera o con ESC
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -138,6 +153,21 @@ export default function ProyectosWordlistsPage() {
       </nav>
 
       <main className="container">
+        <div className="categoryTabs">
+          <button 
+            className={`categoryTab ${activeCategory === "utilidades" ? "categoryTab__active" : ""}`}
+            onClick={() => setActiveCategory("utilidades")}
+          >
+            🛠 Utilidades (Wordlists)
+          </button>
+          <button 
+            className={`categoryTab ${activeCategory === "personales" ? "categoryTab__active" : ""}`}
+            onClick={() => setActiveCategory("personales")}
+          >
+            💻 Proyectos Personales
+          </button>
+        </div>
+
         <section className="filters">
           <div className="tags">
             <button
@@ -147,7 +177,7 @@ export default function ProyectosWordlistsPage() {
             >
               Todos
             </button>
-            {QUICK_TAGS.map((t) => (
+            {availableTags.map((t) => (
               <button
                 key={t}
                 type="button"
@@ -195,22 +225,24 @@ export default function ProyectosWordlistsPage() {
           </div>
         )}
 
-        <section ref={recursosRef} className="recursos" aria-label="Recursos de Seguridad">
-          <h2 className="recursos__title">Seguridad</h2>
-          <h2 className="recursos__title"><span>Nota: Esto NO SON MIS PROYECTOS. Agradecimientos totales a los dueños de los Repositorios uso sus proyectos a menudo.</span></h2>
-          <p className="recursos__text">Colección rápida con los mismos repos de arriba, agrupados como recursos de seguridad. Me ayuda a
-            que cada cosa que aprendo lo puedo encontrar rápido y fácil aquí.
-          </p>
-          <ul className="links">
-            {WORDLISTS.map((r) => (
-              <li key={r.id} className="links__item">
-                <a href={r.url} target="_blank" rel="noreferrer" className="link">
-                  {r.name} — <span className="muted">{r.description}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
+        {activeCategory === "utilidades" && (
+          <section ref={recursosRef} className="recursos" aria-label="Recursos de Seguridad">
+            <h2 className="recursos__title">Seguridad</h2>
+            <h2 className="recursos__title"><span>Nota: Esto NO SON MIS PROYECTOS. Agradecimientos totales a los dueños de los Repositorios uso sus proyectos a menudo.</span></h2>
+            <p className="recursos__text">Colección rápida con los mismos repos de arriba, agrupados como recursos de seguridad. Me ayuda a
+              que cada cosa que aprendo lo puedo encontrar rápido y fácil aquí.
+            </p>
+            <ul className="links">
+              {WORDLISTS.map((r) => (
+                <li key={r.id} className="links__item">
+                  <a href={r.url} target="_blank" rel="noreferrer" className="link">
+                    {r.name} — <span className="muted">{r.description}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </main>
     </div>
   );
